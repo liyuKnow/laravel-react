@@ -1,0 +1,45 @@
+/node_modules
+/public/build
+/public/hot
+/public/storage
+/storage/*.key
+/vendor
+.env
+.env.backup
+.env.production
+.phpunit.result.cache
+Homestead.json
+Homestead.yaml
+auth.json
+npm-debug.log
+yarn-error.log
+/.fleet
+/.idea
+/.vscode
+
+# REACT IGNORES
+
+# Logs
+public/frontend/logs
+public/frontend/*.log
+public/frontend/npm-debug.log*
+public/frontend/yarn-debug.log*
+public/frontend/yarn-error.log*
+public/frontend/pnpm-debug.log*
+public/frontend/lerna-debug.log*
+
+public/frontend/node_modules
+public/frontend/dist
+public/frontend/dist-ssr
+public/frontend/*.local
+
+# Editor directories and files
+public/frontend/.vscode/*
+public/frontend/!.vscode/extensions.json
+public/frontend/.idea
+public/frontend/.DS_Store
+public/frontend/*.suo
+public/frontend/*.ntvs*
+public/frontend/*.njsproj
+public/frontend/*.sln
+public/frontend/*.sw?
