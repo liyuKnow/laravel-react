@@ -1,17 +1,48 @@
-import { Navigate, Outlet, useNavigate } from "react-router-dom";
+import { Link, Navigate, Outlet, useNavigate } from "react-router-dom";
 import { useAuthContext } from "../../../context/AuthContext";
 
 const PublicLayout = () => {
-    const { currentUser } = useAuthContext;
+    const { currentUser, logout } = useAuthContext();
 
-    if (!currentUser) {
+    const navigate = useNavigate();
+
+    if (!currentUser && currentUser === null) {
         return <Navigate to="/login" />;
     }
 
+    console.log({ currentUser });
+
+    const onLogout = () => {
+        logout();
+        navigate("/login");
+    };
+
     return (
-        <div>
-            <h1>Protection is coming!</h1>
-            <Outlet />
+        <div id="defaultLayout">
+            <aside>
+                <Link to="/dashboard">Dashboard</Link>
+                <Link to="/users">Users</Link>
+            </aside>
+            <div className="content">
+                <header>
+                    <div>Header</div>
+
+                    <div>
+                        Tell
+                        {currentUser != undefined && currentUser.username}{" "}
+                        &nbsp; &nbsp;
+                        <a onClick={onLogout} className="btn-logout" href="#">
+                            Logout
+                        </a>
+                    </div>
+                </header>
+                <main>
+                    <Outlet />
+                </main>
+                {/* {notification && (
+                    <div className="notification">{notification}</div>
+                )} */}
+            </div>
         </div>
     );
 };

@@ -10,11 +10,16 @@ export const AuthContextProvider = ({ children }) => {
     );
 
     const login = async (userData) => {
-        const res = await axios.post(
-            "http://localhost:8888/api/auth/login",
-            userData
-        );
-        setCurrentUser(res.data);
+        console.log("Yes I Am a function");
+        setCurrentUser({
+            username: "kidus",
+            email: "kidus@gmail.com",
+        });
+        // const res = await axios.post(
+        //     "http://localhost:8888/api/auth/login",
+        //     userData
+        // );
+        // setCurrentUser(res.data);
     };
 
     const logout = async () => {

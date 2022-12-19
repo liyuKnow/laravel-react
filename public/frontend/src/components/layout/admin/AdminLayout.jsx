@@ -1,9 +1,11 @@
 import React from "react";
 import { Navigate, Outlet } from "react-router-dom";
 import { useAuthContext } from "../../../context/AuthContext";
+import Navbar from "./Navbar";
+import Sidebar from "./Sidebar";
 
 const AdminLayout = () => {
-    const { currentUser } = useAuthContext;
+    const { currentUser } = useAuthContext();
 
     if (!currentUser) {
         return <Navigate to="/login" />;
@@ -11,7 +13,8 @@ const AdminLayout = () => {
 
     return (
         <div>
-            <h1>Navbar from admin layout</h1>
+            <Sidebar />
+            <Navbar />
             <Outlet />
         </div>
     );
