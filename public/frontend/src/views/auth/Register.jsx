@@ -12,7 +12,7 @@ const Register = () => {
     return (
         <div className="login-signup-form animated fadeInDown">
             <div className="form">
-                <form onSubmit={(e) => onRegister(e)}>
+                <form onSubmit={onRegister}>
                     <h1 className="title">Signup for Free</h1>
                     {/* {errors && (
                     <div className="alert">
