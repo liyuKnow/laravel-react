@@ -1,5 +1,6 @@
 import React, { createRef } from "react";
 import { Link } from "react-router-dom";
+import axiosClient from "../../util/axios-client";
 
 const Register = () => {
     const nameRef = createRef();
@@ -8,6 +9,15 @@ const Register = () => {
     const passwordConfirmationRef = createRef();
     const onRegister = (e) => {
         e.preventDefault();
+
+        const payload = {
+            name: nameRef.current.value,
+            email: emailRef.current.value,
+            password_ref: passwordRef.current.value,
+            password_confirmationRef: passwordConfirmationRef.current.value,
+        };
+
+        axiosClient.post("/register");
     };
     return (
         <div className="login-signup-form animated fadeInDown">
