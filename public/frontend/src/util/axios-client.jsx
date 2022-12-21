@@ -1,4 +1,5 @@
 import axios from "axios";
+import NotFound from "../views/error/NotFound";
 
 const axiosClient = axios.create({
     baseURL: `${import.meta.env.VITE_API_BASE_URL}/api`,
@@ -19,10 +20,10 @@ axiosClient.interceptors.response.use(
         const { response } = error;
         if (response.status === 401) {
             localStorage.removeItem("ACCESS_TOKEN");
+        } else if (response.status === 400) {
+            return <NotFound />;
         }
-        // else if (response.status === 400) {
-        //     // Not FOund Page
-        // } else if (response.status === 403) {
+        // else if (response.status === 403) {
         //     // Forbidden page
         // }
 

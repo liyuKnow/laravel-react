@@ -10,7 +10,13 @@ const Login = () => {
     const { login, currentUser } = useAuthContext();
     const navigate = useNavigate();
     const onLogin = () => {
-        login();
+        login(
+            {
+                username: "Kidus",
+                email: "kidus@gmail.com",
+            },
+            12345
+        );
         navigate("/");
     };
     if (currentUser && currentUser != null) {

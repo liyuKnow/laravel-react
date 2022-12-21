@@ -43,14 +43,6 @@ const router = createBrowserRouter([
         element: <Register />,
     },
     {
-        path: "/users",
-        element: <Users />,
-    },
-    {
-        path: "/users",
-        element: <Users />,
-    },
-    {
         path: "*",
         element: <NotFound />,
     },

@@ -1,30 +1,25 @@
 import { createContext, useEffect, useState } from "react";
-import axios from "axios";
 import { useContext } from "react";
 
-export const AuthContext = createContext();
+export const AuthContext = createContext({
+    currentUser: null,
+    login: () => {},
+    logout: () => {},
+});
 
 export const AuthContextProvider = ({ children }) => {
     const [currentUser, setCurrentUser] = useState(
         JSON.parse(localStorage.getItem("user")) || null
     );
 
-    const login = async (userData) => {
-        console.log("Yes I Am a function");
-        setCurrentUser({
-            username: "kidus",
-            email: "kidus@gmail.com",
-        });
-        // const res = await axios.post(
-        //     "http://localhost:8888/api/auth/login",
-        //     userData
-        // );
-        // setCurrentUser(res.data);
+    const login = async (userData, tokenData) => {
+        setCurrentUser(userData);
+        localStorage.setItem("ACCESS_TOKEN", JSON.stringify(tokenData));
     };
 
     const logout = async () => {
-        // const res = await axios.post("http://localhost:8888/api/auth/logout");
         setCurrentUser(null);
+        localStorage.setItem("ACCESS_TOKEN", null);
     };
 
     useEffect(() => {
