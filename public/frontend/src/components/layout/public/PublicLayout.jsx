@@ -1,6 +1,6 @@
 import { Link, Navigate, Outlet, useNavigate } from "react-router-dom";
 import { useAuthContext } from "../../../context/AuthContext";
-
+import axiosClient from "../../../util/axios-client";
 const PublicLayout = () => {
     const { currentUser, logout } = useAuthContext();
 
@@ -13,6 +13,7 @@ const PublicLayout = () => {
     console.log({ currentUser });
 
     const onLogout = () => {
+        axiosClient.post("/logout");
         logout();
         navigate("/login");
     };
