@@ -14,7 +14,7 @@ class AuthController extends Controller
     //
     public function register(RegisterRequest $req)
     {
-        $data = $req->validate();
+        $data = $req->validated();
 
         $user = User::create([
             'name' => $data['name'],
@@ -33,8 +33,8 @@ class AuthController extends Controller
 
         if (!Auth::attempt($credentials)) {
             return response([
-                'message' => 'The provider username or password is incorrect'
-            ]);
+                'message' => 'The provided username or password is incorrect'
+            ], 422);
         }
 
         /** @var User $user */

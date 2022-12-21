@@ -27,23 +27,13 @@ const Register = () => {
         };
 
         axiosClient
-            .post("/registers", payload)
+            .post("/register", payload)
             .then(
                 // successful
                 ({ data }) => {
-                    console.log(data);
-                    // login(data.user, data.token);
-                    login(
-                        {
-                            username: "Kidus",
-                            email: "kidus@gmail.com",
-                        },
-                        12345
-                    );
+                    login(data.user, data.token);
                     navigate("/");
-                },
-                // error
-                () => {}
+                }
             )
             .catch((err) => {
                 const response = err.response;

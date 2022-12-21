@@ -17,15 +17,19 @@ axiosClient.interceptors.response.use(
         return response;
     },
     (error) => {
-        const { response } = error;
-        if (response.status === 401) {
-            localStorage.removeItem("ACCESS_TOKEN");
-        } else if (response.status === 400) {
-            return <NotFound />;
+        try {
+            const { response } = error;
+            if (response.status === 401) {
+                localStorage.removeItem("ACCESS_TOKEN");
+            } else if (response.status === 400) {
+                return <NotFound />;
+            }
+            // else if (response.status === 403) {
+            //     // Forbidden page
+            // }
+        } catch (e) {
+            console.log(e);
         }
-        // else if (response.status === 403) {
-        //     // Forbidden page
-        // }
 
         throw error;
     }

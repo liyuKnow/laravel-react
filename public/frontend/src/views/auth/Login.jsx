@@ -2,22 +2,50 @@ import { useState } from "react";
 import { createRef } from "react";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import { useAuthContext } from "../../context/AuthContext";
+import axiosClient from "../../util/axios-client";
 
 const Login = () => {
     const emailRef = createRef();
     const passwordRef = createRef();
-    const [message, setmessage] = useState("hello I am a message");
+
+    const [errors, setErrors] = useState("");
+
     const { login, currentUser } = useAuthContext();
+
     const navigate = useNavigate();
-    const onLogin = () => {
-        login(
-            {
-                username: "Kidus",
-                email: "kidus@gmail.com",
-            },
-            12345
-        );
-        navigate("/");
+
+    const onLogin = (e) => {
+        e.preventDefault();
+
+        const payload = {
+            email: emailRef.current.value,
+            password: passwordRef.current.value,
+        };
+
+        setErrors(null);
+
+        axiosClient
+            .post("/login", payload)
+            .then(
+                // successful
+                ({ data }) => {
+                    login(data.user, data.token);
+                    navigate("/");
+                }
+            )
+            .catch((err) => {
+                const response = err.response;
+
+                if (response && response.status === 422) {
+                    if (response.data.errors) {
+                        setErrors(response.data.errors);
+                    } else {
+                        setErrors({
+                            password: [response.data.message],
+                        });
+                    }
+                }
+            });
     };
     if (currentUser && currentUser != null) {
         return <Navigate to="/" />;
@@ -28,9 +56,11 @@ const Login = () => {
                 <form onSubmit={onLogin}>
                     <h1 className="title">Login into your account</h1>
 
-                    {message && (
+                    {errors && (
                         <div className="alert">
-                            <p>{message}</p>
+                            {Object.keys(errors).map((key) => (
+                                <p key={key}>{errors[key][0]}</p>
+                            ))}
                         </div>
                     )}
 

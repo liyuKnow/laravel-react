@@ -28,8 +28,7 @@ const PublicLayout = () => {
                     <div>Header</div>
 
                     <div>
-                        Tell
-                        {currentUser != undefined && currentUser.username}{" "}
+                        Hello {currentUser != undefined && currentUser.name}{" "}
                         &nbsp; &nbsp;
                         <a onClick={onLogout} className="btn-logout" href="#">
                             Logout
