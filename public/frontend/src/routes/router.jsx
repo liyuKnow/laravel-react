@@ -3,11 +3,10 @@ import PublicLayout from "../components/layout/public/PublicLayout";
 import AdminLayout from "../components/layout/admin/AdminLayout";
 import Login from "../views/auth/Login";
 import Register from "../views/auth/Register";
-import Users from "../views/auth/Users";
 import NotFound from "../views/error/NotFound";
 import Home from "../views/public/Home";
 import Dashboard from "../views/admin/Dashboard";
-import AboutUs from "../views/public/AboutUs";
+import Users from "../views/public/Users";
 
 const router = createBrowserRouter([
     {
@@ -19,8 +18,8 @@ const router = createBrowserRouter([
                 element: <Home />,
             },
             {
-                path: "/about",
-                element: <AboutUs />,
+                path: "/users",
+                element: <Users />,
             },
         ],
     },
