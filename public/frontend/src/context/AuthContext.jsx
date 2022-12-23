@@ -12,8 +12,13 @@ export const AuthContextProvider = ({ children }) => {
         JSON.parse(localStorage.getItem("user")) || null
     );
 
+    const [token, setToken] = useState(
+        JSON.parse(localStorage.getItem("ACCESS_TOKEN")) || null
+    );
+
     const login = async (userData, tokenData) => {
         setCurrentUser(userData);
+        setToken(tokenData);
         localStorage.setItem("ACCESS_TOKEN", JSON.stringify(tokenData));
     };
 
@@ -24,6 +29,7 @@ export const AuthContextProvider = ({ children }) => {
 
     useEffect(() => {
         localStorage.setItem("user", JSON.stringify(currentUser));
+        localStorage.setItem("ACCESS_TOKEN", JSON.stringify(token));
     }, [currentUser]);
 
     const values = {

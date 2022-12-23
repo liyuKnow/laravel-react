@@ -10,7 +10,6 @@ const PublicLayout = () => {
         return <Navigate to="/login" />;
     }
 
-    console.log({ currentUser });
 
     const onLogout = () => {
         axiosClient.post("/logout");
